@@ -23,10 +23,10 @@ import { WizardStepComponent } from './wizard-step.component';
   </div>`
   ,
   styles: [
-    '.card-header { background-color: #fff; font-size: 1.25rem;}',
+    '.card-header { background-color: #fff; padding: 0; font-size: 1.25rem;}',
     '.nav-item { padding: 1rem 0rem; border-bottom: 0.5rem solid #ccc; }',
-    '.active { font-weight: bold; color: black; border-bottom - color: #1976D2 !important;}',
-    '.enabled { border-bottom - color: rgb(88, 162, 234); }',
+    '.active { font-weight: bold; color: black; border-bottom-color: #1976D2 !important;}',
+    '.enabled { border-bottom-color: rgb(88, 162, 234); }',
     '.disabled { color: #ccc; }'
   ]
 })

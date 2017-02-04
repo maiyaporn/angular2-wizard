@@ -25,7 +25,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // Import your library
-import { SampleModule } from 'angular2-wizard';
+import { FormWizardModule } from 'angular2-wizard';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { SampleModule } from 'angular2-wizard';
     BrowserModule,
 
     // Specify your library as an import
-    LibraryModule
+    FormWizardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -50,7 +50,10 @@ Once your library is imported, you can use its components, directives and pipes 
 <h1>
   {{title}}
 </h1>
-<sampleComponent></sampleComponent>
+<form-wizard>
+    <wizard-step>Step1</wizard-step>
+    <wizard-step>Step2</wizard-step>
+</form-wizard>
 ```
 
 ## Development

@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/repo"
+    "url": "https://github.com/maiyaporn/angular2-wizard"
   },
   "author": {
     "name": "Maiyaporn Phanich",
@@ -21,7 +21,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/username/repo/issues"
+    "url": "https://github.com/maiyaporn/angular2-wizard/issues"
   },
   "main": "./dist/index.js",
   "dependencies": {
