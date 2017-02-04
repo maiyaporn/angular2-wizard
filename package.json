@@ -1,0 +1,49 @@
+{
+  "name": "angular2-wizard",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "ngc -p tsconfig.json",
+    "lint": "tslint src/**/*.ts",
+    "test": "tsc && karma start",
+    "prepublish": "tsc",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/repo"
+  },
+  "author": {
+    "name": "Maiyaporn Phanich",
+    "email": "p.maiyaporn@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/username/repo/issues"
+  },
+  "main": "./dist/index.js",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6"
+  },
+  "devDependencies": {
+    "@angular/core": "^2.3.1",
+    "@angular/common": "^2.3.1",
+    "@angular/compiler": "^2.3.1",
+    "@angular/compiler-cli": "^2.3.1",
+    "@angular/platform-server": "^2.3.1",
+    "@angular/platform-browser": "^2.3.1",
+    "codelyzer": "^0.0.28",
+    "rxjs": "^5.0.1",
+    "tslint": "^3.15.1",
+    "typescript": "2.0.2",
+    "zone.js": "0.7.2",
+    "@types/es6-shim": "^0.31.32",
+    "@types/jasmine": "^2.5.40",
+    "@types/selenium-webdriver": "^2.53.39"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
