@@ -17,7 +17,12 @@
     "email": "p.maiyaporn@gmail.com"
   },
   "keywords": [
-    "angular"
+    "angular2",
+    "angular2-component",
+    "angular2-library",
+    "form-wizard",
+    "wizard",
+    "wizard-step"
   ],
   "license": "MIT",
   "bugs": {
