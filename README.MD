@@ -1,4 +1,6 @@
 # angular2-wizard
+[![npm version](https://badge.fury.io/js/angular2-wizard.svg)](https://badge.fury.io/js/angular2-wizard)
+
 This is an Angular2 Form Wizard component. Just like any form wizard. You can define steps and control how each step works. You can enable/disable navigation button based on validity of the current step. Currently, the component only support basic functionality. More features will come later.
 
 You can checkout the demo below and see how to use it in the next section.
