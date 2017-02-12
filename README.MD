@@ -80,7 +80,7 @@ Once your library is imported, you can use form-wizard and wizard-step component
 ```
 
 ## Document
-
+https://github.com/maiyaporn/angular2-wizard/wiki
 
 ## Development
 
