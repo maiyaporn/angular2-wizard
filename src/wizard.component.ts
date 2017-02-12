@@ -14,15 +14,19 @@ import { WizardStepComponent } from './wizard-step.component';
     </div>
     <div class="card-block">
       <ng-content></ng-content>
-      <div [hidden]="isCompleted">
-          <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep">Previous</button>
-          <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep">Next</button>
-          <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
+    </div>
+    <div class="card-footer" [hidden]="isCompleted">
+        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep">Previous</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep">Next</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
     </div>
   </div>`
   ,
   styles: [
+    '.card { height: 100%; }',
     '.card-header { background-color: #fff; padding: 0; font-size: 1.25rem; }',
+    '.card-block { overflow-y: auto; }',
+    '.card-footer { background-color: #fff; border-top: 0 none; }',
     '.nav-item { padding: 1rem 0rem; border-bottom: 0.5rem solid #ccc; }',
     '.active { font-weight: bold; color: black; border-bottom-color: #1976D2 !important; }',
     '.enabled { border-bottom-color: rgb(88, 162, 234); }',
