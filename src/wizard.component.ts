@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
@@ -8,7 +8,7 @@ import { WizardStepComponent } from './wizard-step.component';
     <div class="card-header">
       <ul class="nav nav-justified">
         <li class="nav-item" *ngFor="let step of steps" [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled}">
-          {{step.title}}
+          <a (click)="goToStep(step)">{{step.title}}</a>
         </li>
       </ul>
     </div>
@@ -17,15 +17,14 @@ import { WizardStepComponent } from './wizard-step.component';
       <div [hidden]="isCompleted">
           <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep">Previous</button>
           <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep">Next</button>
-          <button type="button" class="btn btn-secondary float-right" (click)="complete()" [hidden]="hasNextStep">Done</button>
-      </div>
+          <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
     </div>
   </div>`
   ,
   styles: [
-    '.card-header { background-color: #fff; padding: 0; font-size: 1.25rem;}',
+    '.card-header { background-color: #fff; padding: 0; font-size: 1.25rem; }',
     '.nav-item { padding: 1rem 0rem; border-bottom: 0.5rem solid #ccc; }',
-    '.active { font-weight: bold; color: black; border-bottom-color: #1976D2 !important;}',
+    '.active { font-weight: bold; color: black; border-bottom-color: #1976D2 !important; }',
     '.enabled { border-bottom-color: rgb(88, 162, 234); }',
     '.disabled { color: #ccc; }'
   ]
@@ -34,6 +33,8 @@ export class WizardComponent implements OnInit, AfterContentInit {
   @ContentChildren(WizardStepComponent) wizardSteps: QueryList<WizardStepComponent>;
   private _steps: Array<WizardStepComponent> = [];
   private _isCompleted: boolean = false;
+
+  @Output() onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter();
 
   constructor() { }
 
@@ -57,6 +58,14 @@ export class WizardComponent implements OnInit, AfterContentInit {
     return this._steps.find(step => step.isActive);
   }
 
+  private set activeStep(step: WizardStepComponent) {
+    if (step !== this.activeStep && !step.isDisabled) {
+      this.activeStep.isActive = false;
+      step.isActive = true;
+      this.onStepChanged.emit(step);
+    }
+  }
+
   private get activeStepIndex(): number {
     return this._steps.indexOf(this.activeStep);
   }
@@ -69,12 +78,16 @@ export class WizardComponent implements OnInit, AfterContentInit {
     return this.activeStepIndex > 0;
   }
 
+  goToStep(step: WizardStepComponent) {
+    this.activeStep = step;
+  }
+
   next() {
     if (this.hasNextStep) {
       let nextStep: WizardStepComponent = this._steps[this.activeStepIndex + 1];
       this.activeStep.onNext.emit();
-      this.activeStep.isActive = false;
-      nextStep.isActive = true;
+      nextStep.isDisabled = false;
+      this.activeStep = nextStep;
     }
   }
 
@@ -82,8 +95,8 @@ export class WizardComponent implements OnInit, AfterContentInit {
     if (this.hasPrevStep) {
       let prevStep: WizardStepComponent = this._steps[this.activeStepIndex - 1];
       this.activeStep.onPrev.emit();
-      this.activeStep.isActive = false;
-      prevStep.isActive = true;
+      prevStep.isDisabled = false;
+      this.activeStep = prevStep;
     }
   }
 
