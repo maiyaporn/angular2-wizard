@@ -12,12 +12,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class WizardStepComponent implements OnInit {
   @Input() title: string;
   @Input() isValid: boolean = true;
-  private _isActive: boolean = false;
-  isDisabled: boolean = true;
+  @Input() showNext: boolean = true;
+  @Input() showPrev: boolean = true;
 
   @Output() onNext: EventEmitter<any> = new EventEmitter();
   @Output() onPrev: EventEmitter<any> = new EventEmitter();
   @Output() onComplete: EventEmitter<any> = new EventEmitter();
+
+  private _isActive: boolean = false;
+  isDisabled: boolean = true;
 
   constructor() { }
 
@@ -32,6 +35,5 @@ export class WizardStepComponent implements OnInit {
   get isActive(): boolean {
     return this._isActive;
   }
-
 
 }

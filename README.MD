@@ -101,12 +101,8 @@ $ npm run lint
 ```
 
 ## Improvement
-Click title to navigate
-Hide/Show button
-Disable visited steps after navigate to previous
-Dynamically add/remove step
-- [ ] Click title to navigate
-- [ ] Hide/Show navigation button
+- [x] Click title to navigate
+- [x] Hide/Show navigation button
 - [ ] Disable visited steps after navigate to previous
 - [ ] Dynamically add/remove step
 
