@@ -14,6 +14,3 @@ script:
   - karma start
 after_script:
   - "cat ./coverage/lcov-report/lcov | ./node_modules/coveralls/bin/coveralls.js"
-after_success:
-  - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < lcov.info
