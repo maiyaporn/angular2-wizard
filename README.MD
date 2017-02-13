@@ -1,14 +1,20 @@
 # angular2-wizard
-This is a form wizard component for Angular2 application. Just like any form wizard. You can have as many step as you want and control how each step works. You can enable/disable navigation button based on validity of the current step. Currently, the component only support basic functionality. I'm planning to add more features later. Please feel free to suggest.
+[![npm version](https://badge.fury.io/js/angular2-wizard.svg)](https://badge.fury.io/js/angular2-wizard)
+
+This is an Angular2 Form Wizard component. Just like any form wizard. You can define steps and control how each step works. You can enable/disable navigation button based on validity of the current step. Currently, the component only support basic functionality. More features will come later.
 
 You can checkout the demo below and see how to use it in the next section.
 
 ## Demo
 https://maiyaporn.github.io/angular2-wizard-demo/
 
+## Dependencies
+- Angular2 (tested with 2.3.1)
+- Bootstrap 4
+
 ## Installation
 
-To install this library, run:
+After installing the above dependencies, install angular2-wizard via:
 
 ```bash
 $ npm install angular2-wizard --save
@@ -16,13 +22,7 @@ $ npm install angular2-wizard --save
 
 ## How to use the component
 
-Once you have published your library to npm, you can import your library in any Angular application by running:
-
-```bash
-$ npm install angular2-wizard
-```
-
-and then from your Angular `AppModule`:
+Once you have installed the library, you can import it in `AppModule` of your application:
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,7 +38,6 @@ import { FormWizardModule } from 'angular2-wizard';
   ],
   imports: [
     BrowserModule,
-
     // Specify the library as an import
     FormWizardModule
   ],
@@ -48,13 +47,9 @@ import { FormWizardModule } from 'angular2-wizard';
 export class AppModule { }
 ```
 
-Once your library is imported, you can use its components, directives and pipes in your Angular application:
+Once your library is imported, you can use form-wizard and wizard-step components in your Angular application:
 
 ```xml
-<!-- You can now use your library component in app.component.html -->
-<h1>
-  {{title}}
-</h1>
 <form-wizard>
   <wizard-step [title]="'Step1'" [isValid]="emailForm.form.valid" (onNext)="onStep1Next($event)">
     <h1>Step1</h1>
@@ -85,6 +80,9 @@ Once your library is imported, you can use its components, directives and pipes 
   </wizard-step>
 </form-wizard>
 ```
+
+## Document
+https://github.com/maiyaporn/angular2-wizard/wiki
 
 ## Development
 
