@@ -1,4 +1,13 @@
 language: node_js
-sudo: false
 node_js:
 - '4.2.1'
+before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+install: 
+  - npm install
+script:
+  - karma start
+after_script:
+  - "cat ./coverage/lcov-report/lcov | ./node_modules/coveralls/bin/coveralls.js"
