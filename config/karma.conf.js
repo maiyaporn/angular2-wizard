@@ -30,7 +30,7 @@ module.exports = function(config) {
             'text-summary': null,
             json: './coverage/coverage.json',
             html: './coverage/html',
-            lcovonly: './coverage/lcov-report/lcov'
+            lcovonly: './coverage/lcov.info'
         },
 
         // Webpack please don't spam the console when running in karma!
