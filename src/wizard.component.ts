@@ -38,7 +38,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   private _steps: Array<WizardStepComponent> = [];
   private _isCompleted: boolean = false;
 
-  @Output() onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter();
+  @Output() onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
 
   constructor() { }
 

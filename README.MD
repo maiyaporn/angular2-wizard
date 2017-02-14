@@ -1,6 +1,8 @@
 # angular2-wizard
 [![npm version](https://badge.fury.io/js/angular2-wizard.svg)](https://badge.fury.io/js/angular2-wizard)
 [![Build Status](https://travis-ci.org/maiyaporn/angular2-wizard.svg?branch=master)](https://travis-ci.org/maiyaporn/angular2-wizard)
+[![Code Climate](https://codeclimate.com/github/maiyaporn/angular2-wizard/badges/gpa.svg)](https://codeclimate.com/github/maiyaporn/angular2-wizard)
+[![Code Climate](https://codeclimate.com/github/maiyaporn/angular2-wizard/badges/gpa.svg)](https://codeclimate.com/github/maiyaporn/angular2-wizard)
 
 This is an Angular2 Form Wizard component. Just like any form wizard. You can define steps and control how each step works. You can enable/disable navigation button based on validity of the current step. Currently, the component only support basic functionality. More features will come later.
 
