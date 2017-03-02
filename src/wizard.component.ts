@@ -7,7 +7,7 @@ import { WizardStepComponent } from './wizard-step.component';
   `<div class="card">
     <div class="card-header">
       <ul class="nav nav-justified">
-        <li class="nav-item" *ngFor="let step of steps" [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled}">
+        <li class="nav-item" *ngFor="let step of steps" [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'completed': isCompleted}">
           <a (click)="goToStep(step)">{{step.title}}</a>
         </li>
       </ul>
@@ -29,8 +29,9 @@ import { WizardStepComponent } from './wizard-step.component';
     '.card-footer { background-color: #fff; border-top: 0 none; }',
     '.nav-item { padding: 1rem 0rem; border-bottom: 0.5rem solid #ccc; }',
     '.active { font-weight: bold; color: black; border-bottom-color: #1976D2 !important; }',
-    '.enabled { border-bottom-color: rgb(88, 162, 234); }',
-    '.disabled { color: #ccc; }'
+    '.enabled { cursor: pointer; border-bottom-color: rgb(88, 162, 234); }',
+    '.disabled { color: #ccc; }',
+    '.completed { cursor: default; }'
   ]
 })
 export class WizardComponent implements OnInit, AfterContentInit {
@@ -83,7 +84,9 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   goToStep(step: WizardStepComponent) {
-    this.activeStep = step;
+    if (!this.isCompleted) {
+      this.activeStep = step;
+    }
   }
 
   next() {
@@ -105,8 +108,8 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   complete() {
-    this._isCompleted = true;
     this.activeStep.onComplete.emit();
+    this._isCompleted = true;
   }
 
 }
