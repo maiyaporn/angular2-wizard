@@ -15,9 +15,9 @@ export class WizardStepComponent implements OnInit {
   @Input() showNext: boolean = true;
   @Input() showPrev: boolean = true;
 
-  @Output() onNext: EventEmitter<any> = new EventEmitter();
-  @Output() onPrev: EventEmitter<any> = new EventEmitter();
-  @Output() onComplete: EventEmitter<any> = new EventEmitter();
+  @Output() onNext: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onPrev: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onComplete: EventEmitter<any> = new EventEmitter<any>();
 
   private _isActive: boolean = false;
   isDisabled: boolean = true;
