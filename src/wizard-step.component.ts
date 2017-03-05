@@ -11,6 +11,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class WizardStepComponent implements OnInit {
   @Input() title: string;
+  @Input() hidden: boolean = false;
   @Input() isValid: boolean = true;
   @Input() showNext: boolean = true;
   @Input() showPrev: boolean = true;

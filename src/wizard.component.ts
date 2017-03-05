@@ -35,11 +35,14 @@ import { WizardStepComponent } from './wizard-step.component';
   ]
 })
 export class WizardComponent implements OnInit, AfterContentInit {
-  @ContentChildren(WizardStepComponent) wizardSteps: QueryList<WizardStepComponent>;
+  @ContentChildren(WizardStepComponent)
+  wizardSteps: QueryList<WizardStepComponent>;
+
   private _steps: Array<WizardStepComponent> = [];
   private _isCompleted: boolean = false;
 
-  @Output() onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
+  @Output()
+  onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
 
   constructor() { }
 
@@ -48,11 +51,11 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     this.wizardSteps.forEach(step => this._steps.push(step));
-    this._steps[0].isActive = true;
+    this.steps[0].isActive = true;
   }
 
   private get steps(): Array<WizardStepComponent> {
-    return this._steps;
+    return this._steps.filter(step => !step.hidden);
   }
 
   private get isCompleted(): boolean {
@@ -60,7 +63,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   private get activeStep(): WizardStepComponent {
-    return this._steps.find(step => step.isActive);
+    return this.steps.find(step => step.isActive);
   }
 
   private set activeStep(step: WizardStepComponent) {
@@ -72,11 +75,11 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   private get activeStepIndex(): number {
-    return this._steps.indexOf(this.activeStep);
+    return this.steps.indexOf(this.activeStep);
   }
 
   private get hasNextStep(): boolean {
-    return this.activeStepIndex < this._steps.length - 1;
+    return this.activeStepIndex < this.steps.length - 1;
   }
 
   private get hasPrevStep(): boolean {
@@ -91,7 +94,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
   next() {
     if (this.hasNextStep) {
-      let nextStep: WizardStepComponent = this._steps[this.activeStepIndex + 1];
+      let nextStep: WizardStepComponent = this.steps[this.activeStepIndex + 1];
       this.activeStep.onNext.emit();
       nextStep.isDisabled = false;
       this.activeStep = nextStep;
@@ -100,7 +103,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
   previous() {
     if (this.hasPrevStep) {
-      let prevStep: WizardStepComponent = this._steps[this.activeStepIndex - 1];
+      let prevStep: WizardStepComponent = this.steps[this.activeStepIndex - 1];
       this.activeStep.onPrev.emit();
       prevStep.isDisabled = false;
       this.activeStep = prevStep;
