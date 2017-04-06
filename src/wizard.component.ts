@@ -33,13 +33,12 @@ import { WizardStepComponent } from './wizard-step.component';
     '.disabled { color: #ccc; }',
     '.completed { cursor: default; }'
   ]
-})
 export class WizardComponent implements OnInit, AfterContentInit {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
-  private _steps: Array<WizardStepComponent> = [];
-  private _isCompleted: boolean = false;
+    _steps: Array<WizardStepComponent> = [];
+    _isCompleted: boolean = false;
 
   @Output()
   onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
@@ -54,19 +53,19 @@ export class WizardComponent implements OnInit, AfterContentInit {
     this.steps[0].isActive = true;
   }
 
-  private get steps(): Array<WizardStepComponent> {
+    get steps(): Array<WizardStepComponent> {
     return this._steps.filter(step => !step.hidden);
   }
 
-  private get isCompleted(): boolean {
+    get isCompleted(): boolean {
     return this._isCompleted;
   }
 
-  private get activeStep(): WizardStepComponent {
+    get activeStep(): WizardStepComponent {
     return this.steps.find(step => step.isActive);
   }
 
-  private set activeStep(step: WizardStepComponent) {
+    set activeStep(step: WizardStepComponent) {
     if (step !== this.activeStep && !step.isDisabled) {
       this.activeStep.isActive = false;
       step.isActive = true;
@@ -74,15 +73,15 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  private get activeStepIndex(): number {
+    get activeStepIndex(): number {
     return this.steps.indexOf(this.activeStep);
   }
 
-  private get hasNextStep(): boolean {
+    get hasNextStep(): boolean {
     return this.activeStepIndex < this.steps.length - 1;
   }
 
-  private get hasPrevStep(): boolean {
+    get hasPrevStep(): boolean {
     return this.activeStepIndex > 0;
   }
 
@@ -116,3 +115,4 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
 }
+ 
