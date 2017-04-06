@@ -33,12 +33,13 @@ import { WizardStepComponent } from './wizard-step.component';
     '.disabled { color: #ccc; }',
     '.completed { cursor: default; }'
   ]
+  })
 export class WizardComponent implements OnInit, AfterContentInit {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
-    _steps: Array<WizardStepComponent> = [];
-    _isCompleted: boolean = false;
+    private _steps: Array<WizardStepComponent> = [];
+    private _isCompleted: boolean = false;
 
   @Output()
   onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
