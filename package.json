@@ -6,7 +6,8 @@
     "lint": "tslint src/**/*.ts",
     "test": "karma start karma.conf.js",
     "prepublish": "tsc",
-    "tsc": "tsc"
+    "tsc": "tsc",
+	"build:aot": "rimraf build && ngc -p tsconfig-aot.json"
   },
   "repository": {
     "type": "git",
