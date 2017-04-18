@@ -8,7 +8,7 @@ export declare class WizardComponent implements OnInit, AfterContentInit {
     constructor();
     ngOnInit(): void;
     ngAfterContentInit(): void;
-    private readonly steps;
+    readonly steps: Array<WizardStepComponent>;
     private readonly isCompleted;
     private activeStep;
     private readonly activeStepIndex;

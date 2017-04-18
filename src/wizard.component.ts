@@ -54,7 +54,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     this.steps[0].isActive = true;
   }
 
-  private get steps(): Array<WizardStepComponent> {
+  public get steps(): Array<WizardStepComponent> {
     return this._steps.filter(step => !step.hidden);
   }
 
