@@ -1,10 +1,15 @@
-import { Component, OnInit, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
   selector: 'form-wizard',
   template:
   `<div class="card">
+    <div class="card-footer" [hidden]="paginationTop">
+          <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">Previous</button>
+          <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
+          <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
+      </div>
     <div class="card-header">
       <ul class="nav nav-justified">
         <li class="nav-item" *ngFor="let step of steps" [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'completed': isCompleted}">
@@ -35,6 +40,9 @@ import { WizardStepComponent } from './wizard-step.component';
   ]
 })
 export class WizardComponent implements OnInit, AfterContentInit {
+  
+  @Input() paginationTop: boolean = false;
+
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
