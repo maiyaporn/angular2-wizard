@@ -110,9 +110,19 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  complete() {
-    this.activeStep.onComplete.emit();
-    this._isCompleted = true;
+  reset() {    
+	this.activeStep = this.steps[0];
+	for (let step of this.steps) {
+		step.isDisabled = true;
+	}
+	this.activeStep.isDisabled = false;
+    this.activeStep.isActive = true;
+	this._isCompleted = false;
   }
 
+  complete() {
+    this._isCompleted = true;
+    this.activeStep.onComplete.emit();
+  }
+  
 }
