@@ -74,7 +74,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  private get activeStepIndex(): number {
+  get activeStepIndex(): number {
     return this.steps.indexOf(this.activeStep);
   }
 
