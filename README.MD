@@ -12,7 +12,7 @@ You can checkout the demo below and see how to use it in the next section.
 https://maiyaporn.github.io/angular2-wizard-demo/
 
 ## Dependencies
-- Angular2 (tested with 2.3.1)
+- Angular 4 (tested with 4.0.2, also works with 2.x)
 - Bootstrap 4
 
 ## Installation

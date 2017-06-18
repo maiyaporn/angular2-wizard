@@ -10,6 +10,10 @@
     "outDir": "./dist",
     "typeRoots": [
       "node_modules/@types"
+    ],
+    "lib": [
+      "es2016",
+      "dom"
     ]
   },
   "files": [
