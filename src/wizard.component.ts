@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
@@ -34,7 +34,7 @@ import { WizardStepComponent } from './wizard-step.component';
     '.completed { cursor: default; }'
   ]
 })
-export class WizardComponent implements OnInit, AfterContentInit {
+export class WizardComponent implements AfterContentInit {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
@@ -45,9 +45,6 @@ export class WizardComponent implements OnInit, AfterContentInit {
   onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   ngAfterContentInit() {
     this.wizardSteps.forEach(step => this._steps.push(step));
@@ -74,7 +71,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  private get activeStepIndex(): number {
+  public get activeStepIndex(): number {
     return this.steps.indexOf(this.activeStep);
   }
 
@@ -86,13 +83,13 @@ export class WizardComponent implements OnInit, AfterContentInit {
     return this.activeStepIndex > 0;
   }
 
-  goToStep(step: WizardStepComponent) {
+  public goToStep(step: WizardStepComponent): void {
     if (!this.isCompleted) {
       this.activeStep = step;
     }
   }
 
-  next() {
+  public next(): void {
     if (this.hasNextStep) {
       let nextStep: WizardStepComponent = this.steps[this.activeStepIndex + 1];
       this.activeStep.onNext.emit();
@@ -101,7 +98,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  previous() {
+  public previous(): void {
     if (this.hasPrevStep) {
       let prevStep: WizardStepComponent = this.steps[this.activeStepIndex - 1];
       this.activeStep.onPrev.emit();
@@ -110,7 +107,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  complete() {
+  public complete(): void {
     this.activeStep.onComplete.emit();
     this._isCompleted = true;
   }
