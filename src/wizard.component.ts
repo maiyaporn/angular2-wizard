@@ -17,8 +17,8 @@ import { WizardStepComponent } from './wizard-step.component';
     </div>
     <div class="card-footer" [hidden]="isCompleted">
         <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">Previous</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep?.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep?.isValid" [hidden]="hasNextStep">Done</button>
     </div>
   </div>`
   ,
