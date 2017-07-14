@@ -2,7 +2,7 @@ import { Component, Output, Input, EventEmitter, ContentChildren, QueryList, Aft
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
-  selector: 'wizard',
+  selector: 'form-wizard',
   template:
   `<div class="card">
     <div class="card-header">
