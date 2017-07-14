@@ -1,8 +1,8 @@
-import { Component, Output, Input, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, ContentChildren, QueryList, AfterContentInit, OnChanges } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
-  selector: 'form-wizard',
+  selector: 'wizard',
   template:
   `<div class="card">
     <div class="card-header">
@@ -34,7 +34,7 @@ import { WizardStepComponent } from './wizard-step.component';
     '.completed { cursor: default; }'
   ]
 })
-export class WizardComponent implements AfterContentInit {
+export class WizardComponent implements AfterContentInit, OnChanges {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
@@ -54,11 +54,11 @@ export class WizardComponent implements AfterContentInit {
     }
   }
 
-  public revertToStep(stepIndex: any) {
-    this._isCompleted = false;
-    let nextStep: WizardStepComponent = this.steps[stepIndex];
-    this.goToStep(nextStep);
-  };
+  ngOnChanges() {
+    if (this.forceStep) {
+      this.revertToStep(this.forceStep);
+    }  
+  }
 
   get steps(): Array<WizardStepComponent> {
     return this._steps.filter(step => !step.hidden);
@@ -97,6 +97,12 @@ export class WizardComponent implements AfterContentInit {
       this.activeStep = step;
     }
   }
+
+  public revertToStep(stepIndex: any) {
+    this._isCompleted = false;
+    let nextStep: WizardStepComponent = this.steps[stepIndex];
+    this.goToStep(nextStep);
+  };
 
   public next(): void {
     if (this.hasNextStep) {
