@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
@@ -34,7 +34,7 @@ import { WizardStepComponent } from './wizard-step.component';
     '.completed { cursor: default; }'
   ]
 })
-export class WizardComponent implements OnInit, AfterContentInit {
+export class WizardComponent implements AfterContentInit {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
@@ -46,27 +46,24 @@ export class WizardComponent implements OnInit, AfterContentInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
   ngAfterContentInit() {
     this.wizardSteps.forEach(step => this._steps.push(step));
     this.steps[0].isActive = true;
   }
 
-  private get steps(): Array<WizardStepComponent> {
+  get steps(): Array<WizardStepComponent> {
     return this._steps.filter(step => !step.hidden);
   }
 
-  private get isCompleted(): boolean {
+  get isCompleted(): boolean {
     return this._isCompleted;
   }
 
-  private get activeStep(): WizardStepComponent {
+  get activeStep(): WizardStepComponent {
     return this.steps.find(step => step.isActive);
   }
 
-  private set activeStep(step: WizardStepComponent) {
+  set activeStep(step: WizardStepComponent) {
     if (step !== this.activeStep && !step.isDisabled) {
       this.activeStep.isActive = false;
       step.isActive = true;
@@ -74,25 +71,25 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  private get activeStepIndex(): number {
+  public get activeStepIndex(): number {
     return this.steps.indexOf(this.activeStep);
   }
 
-  private get hasNextStep(): boolean {
+  get hasNextStep(): boolean {
     return this.activeStepIndex < this.steps.length - 1;
   }
 
-  private get hasPrevStep(): boolean {
+  get hasPrevStep(): boolean {
     return this.activeStepIndex > 0;
   }
 
-  goToStep(step: WizardStepComponent) {
+  public goToStep(step: WizardStepComponent): void {
     if (!this.isCompleted) {
       this.activeStep = step;
     }
   }
 
-  next() {
+  public next(): void {
     if (this.hasNextStep) {
       let nextStep: WizardStepComponent = this.steps[this.activeStepIndex + 1];
       this.activeStep.onNext.emit();
@@ -101,7 +98,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  previous() {
+  public previous(): void {
     if (this.hasPrevStep) {
       let prevStep: WizardStepComponent = this.steps[this.activeStepIndex - 1];
       this.activeStep.onPrev.emit();
@@ -110,7 +107,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     }
   }
 
-  reset() {    
+  public reset() {    
     this.activeStep = this.steps[0];
     for (let step of this.steps) {
         step.isDisabled = true;
@@ -120,7 +117,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
     this._isCompleted = false;
   }
 
-  complete() {
+  public complete(): void {
     this._isCompleted = true;
     this.activeStep.onComplete.emit();
   }
