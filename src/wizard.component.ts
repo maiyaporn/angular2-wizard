@@ -126,13 +126,13 @@ export class WizardComponent implements AfterContentInit {
    */
   public reset(force: boolean = false): void {
     if (this._isCompleted || force){
+      this.activeStep = this.steps[0];
       this.steps.forEach((step)=>{
-        step.isValid = false;
-        step.isActive = false;
-        step.isDisabled = false;
+        step.isDisabled = true;
       });
 
-      this.steps[0].isActive = true;
+      this.activeStep.isDisabled = false;
+      this.activeStep.isActive = true;
       this._isCompleted = false;
     }
   }
