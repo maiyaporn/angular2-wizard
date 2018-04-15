@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
@@ -16,9 +16,9 @@ import { WizardStepComponent } from './wizard-step.component';
       <ng-content></ng-content>
     </div>
     <div class="card-footer" [hidden]="isCompleted">
-        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">Previous</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
+        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">{{previousText}}</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">{{nextText}}</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">{{doneText}}</button>
     </div>
   </div>`
   ,
@@ -43,6 +43,16 @@ export class WizardComponent implements AfterContentInit {
 
   @Output()
   onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
+
+  @Input()
+  previousText: string = "Previous";
+
+  @Input()
+  nextText: string = "Next";
+
+  @Input()
+  doneText: string = "Done";
+
 
   constructor() { }
 
@@ -110,6 +120,21 @@ export class WizardComponent implements AfterContentInit {
   public complete(): void {
     this.activeStep.onComplete.emit();
     this._isCompleted = true;
+  }
+  /*
+   * 
+   */
+  public reset(force: boolean = false): void {
+    if (this._isCompleted || force){
+      this.steps.forEach((step)=>{
+        step.isValid = false;
+        step.isActive = false;
+        step.isDisabled = false;
+      });
+
+      this.steps[0].isActive = true;
+      this._isCompleted = false;
+    }
   }
 
 }
