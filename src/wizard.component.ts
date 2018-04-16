@@ -15,10 +15,10 @@ import { WizardStepComponent } from './wizard-step.component';
     <div class="card-block">
       <ng-content></ng-content>
     </div>
-    <div class="card-footer" [hidden]="isCompleted">
-        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">{{previousText}}</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">{{nextText}}</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">{{doneText}}</button>
+    <div class="card-footer" *ngIf="!isCompleted">
+        <button type="button" class="btn btn-default float-left" (click)="previous()" *ngIf="hasPrevStep || activeStep.showPrev">{{previousText}}</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" *ngIf="hasNextStep || activeStep.showNext">{{nextText}}</button>
+        <button type="button" class="btn btn-primary float-right" (click)="complete()" [disabled]="!activeStep.isValid" *ngIf="!hasNextStep">{{doneText}}</button>
     </div>
   </div>`
   ,
@@ -45,13 +45,13 @@ export class WizardComponent implements AfterContentInit {
   onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
 
   @Input()
-  previousText: string = "Previous";
+  previousText: string = 'Previous';
 
   @Input()
-  nextText: string = "Next";
+  nextText: string = 'Next';
 
   @Input()
-  doneText: string = "Done";
+  doneText: string = 'Done';
 
 
   constructor() { }
@@ -131,9 +131,13 @@ export class WizardComponent implements AfterContentInit {
         step.isDisabled = true;
       });
 
+      this._isCompleted = false;
       this.activeStep.isDisabled = false;
       this.activeStep.isActive = true;
-      this._isCompleted = false;
+
+      setTimeout(()=>{
+        this._isCompleted = false;
+      }, 1000);
     }
   }
 

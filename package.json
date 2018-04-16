@@ -1,5 +1,5 @@
 {
-  "name": "angular2-wizard",
+  "name": "@3dluis/angular2-wizard",
   "version": "0.3.0",
   "scripts": {
     "build": "ngc -p tsconfig.json",
