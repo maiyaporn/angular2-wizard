@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit, OnInit } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
@@ -34,7 +34,7 @@ import { WizardStepComponent } from './wizard-step.component';
     '.completed { cursor: default; }'
   ]
 })
-export class WizardComponent implements AfterContentInit {
+export class WizardComponent implements OnInit, AfterContentInit {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
@@ -46,6 +46,9 @@ export class WizardComponent implements AfterContentInit {
 
   constructor() { }
 
+  ngOnInit(){
+
+  }
   ngAfterContentInit() {
     this.wizardSteps.forEach(step => this._steps.push(step));
     this.steps[0].isActive = true;
