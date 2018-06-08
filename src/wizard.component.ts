@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
@@ -16,9 +16,9 @@ import { WizardStepComponent } from './wizard-step.component';
       <ng-content></ng-content>
     </div>
     <div class="card-footer" [hidden]="isCompleted">
-        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">Previous</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
+        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">{{buttonPrevious}}</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">{{buttonNext}}</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">{{buttonDone}}</button>
     </div>
   </div>`
   ,
@@ -38,6 +38,10 @@ export class WizardComponent implements AfterContentInit {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
 
+  @Input() buttonNext: string;
+  @Input() buttonPrevious: string;
+  @Input() buttonDone: string;
+
   private _steps: Array<WizardStepComponent> = [];
   private _isCompleted: boolean = false;
 
@@ -49,6 +53,9 @@ export class WizardComponent implements AfterContentInit {
   ngAfterContentInit() {
     this.wizardSteps.forEach(step => this._steps.push(step));
     this.steps[0].isActive = true;
+    this.buttonNext = (this.buttonNext) ? this.buttonNext: "Next";
+    this.buttonPrevious = (this.buttonPrevious) ? this.buttonPrevious: "Previous";
+    this.buttonDone = (this.buttonDone) ? this.buttonDone: "Done";
   }
 
   get steps(): Array<WizardStepComponent> {
