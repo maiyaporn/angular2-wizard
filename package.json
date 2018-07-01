@@ -38,7 +38,7 @@
     "@angular/compiler-cli": "^4.0.2",
     "@angular/core": "^4.0.2",
     "@angular/platform-browser": "^4.0.2",
-    "@angular/platform-browser-dynamic": "^^4.0.2",
+    "@angular/platform-browser-dynamic": "^4.0.2",
     "@angular/platform-server": "^4.0.2",
     "@types/es6-shim": "^0.31.32",
     "@types/jasmine": "^2.5.42",
