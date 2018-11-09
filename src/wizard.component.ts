@@ -16,9 +16,9 @@ import { WizardStepComponent } from './wizard-step.component';
       <ng-content></ng-content>
     </div>
     <div class="card-footer" [hidden]="isCompleted">
-        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">Previous</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
+        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">{{ prevText }}</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">{{ nextText }}</button>
+        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">{{ doneText }}</button>
     </div>
   </div>`
   ,
@@ -44,9 +44,20 @@ export class WizardComponent implements AfterContentInit {
   @Output()
   onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
 
+  @Input() nextTextInput: string;
+  @Input() prevTextInput: string;
+  @Input() doneTextInput: string;
+  
+  public nextText:string = "Next";
+  public prevText:string = "Previous";
+  public doneText:string = "Done";
+
   constructor() { }
 
   ngAfterContentInit() {
+    this.nextText = this.nextTextInput ? this.nextTextInput : this.nextText;
+    this.prevText = this.prevTextInput ? this.prevTextInput : this.prevText;
+    this.doneText = this.doneTextInput ? this.doneTextInput : this.doneText;
     this.wizardSteps.forEach(step => this._steps.push(step));
     this.steps[0].isActive = true;
   }
