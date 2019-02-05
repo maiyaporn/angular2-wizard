@@ -1,6 +1,6 @@
 {
-  "name": "angular2-wizard",
-  "version": "0.3.0",
+  "name": "@betaquick/angular2-wizard",
+  "version": "1.0.0",
   "scripts": {
     "build": "ngc -p tsconfig.json",
     "lint": "tslint src/**/*.ts",
@@ -10,12 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/maiyaporn/angular2-wizard"
+    "url": "git+https://github.com/betaquick/angular2-wizard.git"
   },
-  "author": {
-    "name": "Maiyaporn Phanich",
-    "email": "p.maiyaporn@gmail.com"
-  },
+  "author": "Rasheed Rahman <radiumrasheed@gmail.com>",
   "keywords": [
     "angular2-wizard",
     "form-wizard",
@@ -26,25 +23,26 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/maiyaporn/angular2-wizard/issues"
+    "url": "https://github.com/betaquick/angular2-wizard/issues"
   },
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6"
   },
   "devDependencies": {
-    "@angular/common": "^2.3.1",
-    "@angular/compiler": "^2.3.1",
-    "@angular/compiler-cli": "^2.3.1",
-    "@angular/core": "^2.3.1",
-    "@angular/platform-browser": "^2.3.1",
-    "@angular/platform-browser-dynamic": "^2.3.1",
-    "@angular/platform-server": "^2.3.1",
+    "@angular/common": "^4.0.2",
+    "@angular/compiler": "^4.0.2",
+    "@angular/compiler-cli": "^4.0.2",
+    "@angular/core": "^4.0.2",
+    "@angular/platform-browser": "^4.0.2",
+    "@angular/platform-browser-dynamic": "^4.0.2",
+    "@angular/platform-server": "^4.0.2",
     "@types/es6-shim": "^0.31.32",
     "@types/jasmine": "^2.5.42",
-    "@types/selenium-webdriver": "^2.53.39",
+    "@types/selenium-webdriver": "^3.0.1",
     "awesome-typescript-loader": "^3.0.4-rc.2",
-    "codelyzer": "^0.0.28",
+    "codelyzer": "^2.1.1",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.1",
@@ -55,15 +53,17 @@
     "karma-remap-coverage": "^0.1.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.2",
-    "rxjs": "^5.0.1",
-    "source-map-loader": "^0.1.6",
+    "rxjs": "^5.1.0",
+    "source-map-loader": "^0.2.1",
     "ts-helpers": "^1.1.2",
-    "tslint": "^3.15.1",
-    "typescript": "^2.1.6",
+    "tslint": "~4.0.0",
+    "typescript": "^2.2.1",
     "webpack": "^2.2.1",
-    "zone.js": "0.7.2"
+    "zone.js": "0.8.5"
   },
   "engines": {
     "node": ">=0.8.0"
-  }
+  },
+  "description": "[![npm version](https://badge.fury.io/js/angular2-wizard.svg)](https://badge.fury.io/js/angular2-wizard)\r [![Build Status](https://travis-ci.org/maiyaporn/angular2-wizard.svg?branch=master)](https://travis-ci.org/maiyaporn/angular2-wizard)\r [![Code Climate](https://codeclimate.com/github/maiyaporn/angular2-wizard/badges/gpa.svg)](https://codeclimate.com/github/maiyaporn/angular2-wizard)\r [![Test Coverage](https://codeclimate.com/github/maiyaporn/angular2-wizard/badges/coverage.svg)](https://codeclimate.com/github/maiyaporn/angular2-wizard/coverage)",
+  "homepage": "https://github.com/betaquick/angular2-wizard#readme"
 }
