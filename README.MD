@@ -1,4 +1,4 @@
-# angular2-wizard
+# @betaquick/angular2-wizard
 [![npm version](https://badge.fury.io/js/angular2-wizard.svg)](https://badge.fury.io/js/angular2-wizard)
 [![Build Status](https://travis-ci.org/maiyaporn/angular2-wizard.svg?branch=master)](https://travis-ci.org/maiyaporn/angular2-wizard)
 [![Code Climate](https://codeclimate.com/github/maiyaporn/angular2-wizard/badges/gpa.svg)](https://codeclimate.com/github/maiyaporn/angular2-wizard)
@@ -22,7 +22,7 @@ https://maiyaporn.github.io/angular2-wizard-demo/
 After installing the above dependencies, install angular2-wizard via:
 
 ```bash
-$ npm install angular2-wizard --save
+$ npm install @betaquick/angular2-wizard --save
 ```
 
 ## How to use the component
@@ -87,7 +87,7 @@ Once your library is imported, you can use form-wizard and wizard-step component
 ```
 
 ## Document
-https://github.com/betaquick/angular2-wizard/wiki
+https://github.com/maiyaporn/angular2-wizard/wiki
 
 ## Development
 
