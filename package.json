@@ -1,6 +1,6 @@
 {
   "name": "@betaquick/angular2-wizard",
-  "version": "1.0.0",
+  "version": "4.0.1",
   "scripts": {
     "build": "ngc -p tsconfig.json",
     "lint": "tslint src/**/*.ts",
