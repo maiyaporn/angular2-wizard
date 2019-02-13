@@ -4,23 +4,31 @@ import { WizardStepComponent } from './wizard-step.component';
 @Component({
   selector: 'form-wizard',
   template:
-  `<div class="card">
-    <div class="card-header">
-      <ul class="nav nav-justified">
-        <li class="nav-item" *ngFor="let step of steps" [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'completed': isCompleted}">
-          <a (click)="goToStep(step)">{{step.title}}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="card-block">
-      <ng-content></ng-content>
-    </div>
-    <div class="card-footer" [hidden]="isCompleted">
-        <button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">Previous</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
-        <button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Done</button>
-    </div>
-  </div>`
+        `
+		<div class="card">
+			<div class="card-header">
+				<ul class="nav nav-justified">
+					<li class="nav-item" *ngFor="let step of steps"
+					    [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'completed': isCompleted}">
+						<a (click)="goToStep(step)">{{step.title}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="card-block">
+				<ng-content></ng-content>
+			</div>
+			<div class="card-footer" [hidden]="isCompleted">
+				<button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">
+					Previous
+				</button>
+				<button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid"
+				        [hidden]="!hasNextStep || !activeStep.showNext">Next
+				</button>
+				<button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid"
+				        [hidden]="hasNextStep">Done
+				</button>
+			</div>
+		</div>`
   ,
   styles: [
     '.card { height: 100%; }',
@@ -35,25 +43,19 @@ import { WizardStepComponent } from './wizard-step.component';
   ]
 })
 export class WizardComponent implements AfterContentInit {
-  @ContentChildren(WizardStepComponent)
-  wizardSteps: QueryList<WizardStepComponent>;
+  @ContentChildren(WizardStepComponent) wizardSteps: QueryList<WizardStepComponent>;
+  @Output() onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
+
+  constructor() {
+  }
 
   private _steps: Array<WizardStepComponent> = [];
-  private _isCompleted: boolean = false;
-
-  @Output()
-  onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
-
-  constructor() { }
-
-  ngAfterContentInit() {
-    this.wizardSteps.forEach(step => this._steps.push(step));
-    this.steps[0].isActive = true;
-  }
 
   get steps(): Array<WizardStepComponent> {
     return this._steps.filter(step => !step.hidden);
   }
+
+  private _isCompleted: boolean = false;
 
   get isCompleted(): boolean {
     return this._isCompleted;
@@ -81,6 +83,11 @@ export class WizardComponent implements AfterContentInit {
 
   get hasPrevStep(): boolean {
     return this.activeStepIndex > 0;
+  }
+
+  ngAfterContentInit() {
+    this.wizardSteps.forEach(step => this._steps.push(step));
+    this.steps[0].isActive = true;
   }
 
   public goToStep(step: WizardStepComponent): void {
