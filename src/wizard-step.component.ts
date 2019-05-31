@@ -1,5 +1,4 @@
-import { AfterContentInit, Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'wizard-step',
@@ -10,13 +9,12 @@ import { NgForm } from '@angular/forms';
 		</div>
   `
 })
-export class WizardStepComponent implements AfterContentInit {
+export class WizardStepComponent  {
   @Input() title: string;
   @Input() hidden: boolean = false;
   @Input() showNext: boolean = true;
   @Input() isValid: boolean = true;
   @Input() showPrev: boolean = true;
-  @ContentChild(NgForm) form: NgForm;
   @Output() onNext: EventEmitter<any> = new EventEmitter<any>();
   @Output() onPrev: EventEmitter<any> = new EventEmitter<any>();
   @Output() onComplete: EventEmitter<any> = new EventEmitter<any>();
@@ -35,11 +33,5 @@ export class WizardStepComponent implements AfterContentInit {
   set isActive(isActive: boolean) {
     this._isActive = isActive;
     this.isDisabled = false;
-  }
-
-  ngAfterContentInit(): void {
-    if (this.form) {
-      this.form.statusChanges.subscribe(() => this.isValid = this.form.form.valid);
-    }
   }
 }

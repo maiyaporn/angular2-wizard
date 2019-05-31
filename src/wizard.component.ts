@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, ContentChildren, QueryList, AfterContentInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit, OnChanges } from '@angular/core';
 import { WizardStepComponent } from './wizard-step.component';
 
 @Component({
@@ -43,20 +43,28 @@ import { WizardStepComponent } from './wizard-step.component';
   ]
 })
 export class WizardComponent implements AfterContentInit, OnChanges {
-  @ContentChildren(WizardStepComponent) wizardSteps: QueryList<WizardStepComponent>;
+  @ContentChildren(WizardStepComponent)
+  wizardSteps: QueryList<WizardStepComponent>;
   @Input() forceStep: number;
-  @Output() onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
-
-  constructor() {
-  }
 
   private _steps: Array<WizardStepComponent> = [];
+  private _isCompleted: boolean = false;
+
+  @Output()
+  onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
+
+  constructor() { }
+
+  ngAfterContentInit() {
+    this.wizardSteps.forEach(step => this._steps.push(step));
+    if (this.steps.length) {
+      this.steps[0].isActive = true;
+    }
+  }
 
   get steps(): Array<WizardStepComponent> {
     return this._steps.filter(step => !step.hidden);
   }
-
-  private _isCompleted: boolean = false;
 
   get isCompleted(): boolean {
     return this._isCompleted;
@@ -86,23 +94,10 @@ export class WizardComponent implements AfterContentInit, OnChanges {
     return this.activeStepIndex > 0;
   }
 
-  ngAfterContentInit() {
-    this.wizardSteps.forEach(step => this._steps.push(step));
-    if (this.steps.length) {
-      this.steps[0].isActive = true;
-    }
-  }
-
   ngOnChanges() {
     if (this.forceStep) {
       this.revertToStep(this.forceStep);
     }  
-  }
-
-  public goToStep(step: WizardStepComponent): void {
-    if (!this.isCompleted) {
-      this.activeStep = step;
-    }
   }
 
   public revertToStep(stepIndex: any) {
@@ -110,6 +105,12 @@ export class WizardComponent implements AfterContentInit, OnChanges {
     let nextStep: WizardStepComponent = this.steps[stepIndex];
     this.goToStep(nextStep);
   };
+
+  public goToStep(step: WizardStepComponent): void {
+    if (!this.isCompleted) {
+      this.activeStep = step;
+    }
+  }
 
   public next(): void {
     if (this.hasNextStep) {

@@ -2,12 +2,11 @@ import { TestBed } from '@angular/core/testing';
 
 import { WizardStepComponent } from './wizard-step.component';
 import { FormWizardModule } from '../index';
-import {FormsModule} from '@angular/forms';
 
 describe('Wizard Step Component', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [FormWizardModule, FormsModule]
+            imports: [FormWizardModule]
         });
     });
 
