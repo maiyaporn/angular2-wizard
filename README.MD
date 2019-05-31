@@ -1,4 +1,4 @@
-# angular2-wizard
+# @betaquick/angular2-wizard
 [![npm version](https://badge.fury.io/js/angular2-wizard.svg)](https://badge.fury.io/js/angular2-wizard)
 [![Build Status](https://travis-ci.org/maiyaporn/angular2-wizard.svg?branch=master)](https://travis-ci.org/maiyaporn/angular2-wizard)
 [![Code Climate](https://codeclimate.com/github/maiyaporn/angular2-wizard/badges/gpa.svg)](https://codeclimate.com/github/maiyaporn/angular2-wizard)
@@ -8,11 +8,13 @@ This is an Angular2 Form Wizard component. Just like any form wizard. You can de
 
 You can checkout the demo below and see how to use it in the next section.
 
+_This is a forked repo from https://maiyaporn.github.io/angular2-wizard with support for recent angular versions._
+
 ## Demo
 https://maiyaporn.github.io/angular2-wizard-demo/
 
 ## Dependencies
-- Angular2 (tested with 2.3.1)
+- Angular2 & above (tested with 4.0.2)
 - Bootstrap 4
 
 ## Installation
@@ -20,7 +22,7 @@ https://maiyaporn.github.io/angular2-wizard-demo/
 After installing the above dependencies, install angular2-wizard via:
 
 ```bash
-$ npm install angular2-wizard --save
+$ npm install @betaquick/angular2-wizard --save
 ```
 
 ## How to use the component
@@ -33,7 +35,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // Import your library
-import { FormWizardModule } from 'angular2-wizard';
+import { FormWizardModule } from '@betaquick/angular2-wizard';
 
 @NgModule({
   declarations: [
@@ -110,4 +112,4 @@ $ npm run lint
 
 ## License
 
-MIT © [Maiyaporn Phanich](mailto:p.maiyaporn@gmail.com)
+MIT © [Rasheed Rahman](mailto:radiumrasheed@gmail.com)
