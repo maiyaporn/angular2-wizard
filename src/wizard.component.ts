@@ -139,8 +139,12 @@ export class WizardComponent implements AfterContentInit, OnChanges {
   }
 
   public complete(): void {
-    this.activeStep.onComplete.emit();
-    this._isCompleted = true;
+    if (!this.activeStep.isValid) {
+      this.activeStep.isChecked = true;
+    } else {
+      this.activeStep.onComplete.emit();
+      this._isCompleted = true;
+    }
   }
 
 }
