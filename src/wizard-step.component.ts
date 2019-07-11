@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'wizard-step',
@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 		</div>
   `
 })
-export class WizardStepComponent  {
+export class WizardStepComponent {
   @Input() title: string;
   @Input() hidden: boolean = false;
   @Input() showNext: boolean = true;
@@ -19,6 +19,7 @@ export class WizardStepComponent  {
   @Output() onPrev: EventEmitter<any> = new EventEmitter<any>();
   @Output() onComplete: EventEmitter<any> = new EventEmitter<any>();
   isDisabled: boolean = true;
+  isChecked: boolean = false;
 
   constructor() {
   }
@@ -32,6 +33,7 @@ export class WizardStepComponent  {
   @Input('isActive')
   set isActive(isActive: boolean) {
     this._isActive = isActive;
+    this.isChecked = false;
     this.isDisabled = false;
   }
 }
