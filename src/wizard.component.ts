@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit, OnChanges } from '@angular/core';
-import { WizardStepComponent } from './wizard-step.component';
+import {Component, Input, Output, EventEmitter, ContentChildren, QueryList, AfterContentInit, OnChanges} from '@angular/core';
+import {WizardStepComponent} from './wizard-step.component';
 
 @Component({
   selector: 'form-wizard',
@@ -21,10 +21,12 @@ import { WizardStepComponent } from './wizard-step.component';
 				<button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">
 					Previous
 				</button>
-				<button type="button" class="btn btn-secondary float-right" (click)="next()" [disabled]="!activeStep.isValid"
+				<button type="button" class="btn btn-secondary float-right" (click)="next()"
+				        [disabled]="activeStep.isChecked && !activeStep.isValid"
 				        [hidden]="!hasNextStep || !activeStep.showNext">Next
 				</button>
-				<button type="button" class="btn btn-secondary float-right" (click)="complete()" [disabled]="!activeStep.isValid"
+				<button type="button" class="btn btn-secondary float-right" (click)="complete()"
+				        [disabled]="activeStep.isChecked && !activeStep.isValid"
 				        [hidden]="hasNextStep">Done
 				</button>
 			</div>
@@ -53,7 +55,8 @@ export class WizardComponent implements AfterContentInit, OnChanges {
   @Output()
   onStepChanged: EventEmitter<WizardStepComponent> = new EventEmitter<WizardStepComponent>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngAfterContentInit() {
     this.wizardSteps.forEach(step => this._steps.push(step));
@@ -97,7 +100,7 @@ export class WizardComponent implements AfterContentInit, OnChanges {
   ngOnChanges() {
     if (this.forceStep) {
       this.revertToStep(this.forceStep);
-    }  
+    }
   }
 
   public revertToStep(stepIndex: any) {
@@ -115,9 +118,14 @@ export class WizardComponent implements AfterContentInit, OnChanges {
   public next(): void {
     if (this.hasNextStep) {
       let nextStep: WizardStepComponent = this.steps[this.activeStepIndex + 1];
-      this.activeStep.onNext.emit();
-      nextStep.isDisabled = false;
-      this.activeStep = nextStep;
+
+      if (!this.activeStep.isValid) {
+        this.activeStep.isChecked = true;
+      } else {
+        this.activeStep.onNext.emit();
+        nextStep.isDisabled = false;
+        this.activeStep = nextStep;
+      }
     }
   }
 
