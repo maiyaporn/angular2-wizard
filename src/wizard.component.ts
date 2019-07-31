@@ -21,6 +21,7 @@ import {WizardStepComponent} from './wizard-step.component';
 				<button type="button" class="btn btn-secondary float-left" (click)="previous()" [hidden]="!hasPrevStep || !activeStep.showPrev">
 					Previous
 				</button>
+                <button type="button" class="btn btn-danger float-right" (click)="cancelForm()">Cancel</button>
 				<button type="button" class="btn btn-secondary float-right" (click)="next()"
 				        [disabled]="activeStep.isChecked && !activeStep.isValid"
 				        [hidden]="!hasNextStep || !activeStep.showNext">Next
@@ -48,6 +49,7 @@ export class WizardComponent implements AfterContentInit, OnChanges {
   @ContentChildren(WizardStepComponent)
   wizardSteps: QueryList<WizardStepComponent>;
   @Input() forceStep: number;
+  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   private _steps: Array<WizardStepComponent> = [];
   private _isCompleted: boolean = false;
@@ -145,6 +147,10 @@ export class WizardComponent implements AfterContentInit, OnChanges {
       this.activeStep.onComplete.emit();
       this._isCompleted = true;
     }
+  }
+
+  public cancelForm(): void {
+    this.cancel.emit();
   }
 
 }
