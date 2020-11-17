@@ -66,5 +66,8 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "_comment01": {
+    "typings": "./dist/index.d.ts"
   }
 }
