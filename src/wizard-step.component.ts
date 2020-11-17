@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 
 @Component({
   selector: 'wizard-step',
@@ -9,7 +9,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     </div>
   `
 })
-export class WizardStepComponent {
+export class WizardStepComponent implements OnInit {
   @Input() title: string;
   @Input() hidden: boolean = false;
   @Input() isValid: boolean = true;
@@ -24,6 +24,10 @@ export class WizardStepComponent {
   isDisabled: boolean = true;
 
   constructor() { }
+
+    ngOnInit(){
+
+    }
 
   @Input('isActive')
   set isActive(isActive: boolean) {
