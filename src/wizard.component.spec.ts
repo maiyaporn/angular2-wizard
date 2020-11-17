@@ -14,10 +14,8 @@ describe('Wizard Component', () => {
         TestBed.compileComponents();
     });
 
-    describe('', () => {
-        it('', () => {
-            let fixture = TestBed.createComponent(WizardComponent);
-        });
+    it('should create the app', () => {
+        const fixture = TestBed.createComponent(WizardComponent);
     });
 
 });

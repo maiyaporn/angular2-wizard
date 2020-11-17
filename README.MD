@@ -54,7 +54,7 @@ Once your library is imported, you can use form-wizard and wizard-step component
 
 ```xml
 <form-wizard>
-  <wizard-step [title]="'Step1'" [isValid]="emailForm.form.valid" (onNext)="onStep1Next($event)">
+  <wizard-step [title]="'Step1'" [nextText]="'Next'" [previousText]="'Previous'" [doneText]="'Done'" [isValid]="emailForm.form.valid" (onNext)="onStep1Next($event)">
     <h1>Step1</h1>
     <form #emailForm="ngForm">
       <div class="form-group">
