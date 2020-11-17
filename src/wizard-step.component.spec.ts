@@ -14,15 +14,13 @@ describe('Wizard Step Component', () => {
         TestBed.compileComponents();
     });
 
-    describe('when create wizard step', () => {
-        it('should have a title', () => {
-            let fixture = TestBed.createComponent(WizardStepComponent);
-            fixture.componentInstance.title = 'Step1';
+it('should have a title', () => {
+    let fixture = TestBed.createComponent(WizardStepComponent);
+    fixture.componentInstance.title = 'Step1';
 
-            fixture.detectChanges();
+    fixture.detectChanges();
 
-            expect(fixture.componentInstance.title).toBe('Step1');
-        });
-    });
+    expect(fixture.componentInstance.title).toBe('Step1');
+});
 
 });

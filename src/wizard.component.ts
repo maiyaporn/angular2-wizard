@@ -7,7 +7,8 @@ import { WizardStepComponent } from './wizard-step.component';
   `<div class="card">
     <div class="card-header">
       <ul class="nav nav-justified">
-        <li class="nav-item" *ngFor="let step of steps" [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'completed': isCompleted}">
+        <li class="nav-item" *ngFor="let step of steps" 
+        [ngClass]="{'active': step.isActive, 'enabled': !step.isDisabled, 'disabled': step.isDisabled, 'completed': isCompleted}">
           <a (click)="goToStep(step)">{{step.title}}</a>
         </li>
       </ul>
@@ -129,9 +130,9 @@ export class WizardComponent implements OnInit, AfterContentInit {
    * 
    */
   public reset(force: boolean = false): void {
-    if (this._isCompleted || force){
+    if (this._isCompleted || force) {
       this.activeStep = this.steps[0];
-      this.steps.forEach((step)=>{
+      this.steps.forEach((step) => {
         step.isDisabled = true;
       });
 
@@ -139,7 +140,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
       this.activeStep.isDisabled = false;
       this.activeStep.isActive = true;
 
-      setTimeout(()=>{
+      setTimeout(() => {
         this._isCompleted = false;
       }, 1000);
     }
